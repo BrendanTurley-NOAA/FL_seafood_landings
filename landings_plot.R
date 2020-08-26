@@ -34,8 +34,8 @@ ind_ytd <- which(data$Month=='January' |
 ### pull out Gag landed in year to date
 ind_gag_ytd <- base::intersect(ind_gag,ind_ytd)
 gag <- data[ind_gag,]
-gag <- data[ind_gag_ytd,]
-gag <- data
+# gag <- data[ind_gag_ytd,]
+# gag <- data
 sum_agg <- aggregate(gag$Estimated.Value,by=list(gag$Year,gag$Month),sum,na.rm=T)
 
 
@@ -47,14 +47,17 @@ boxplot(gag$Estimated.Value~gag$Year)
 
 mths <- unique(gag$Month)
 # plot(0,0,xlim=c(2013,2021),ylim=c(1e5,25e5))
-par(bg='gray20')
+setwd('~/Documents/R/Github/FL_seafood_landings/figures')
+png('gouper_landings.png',width=5,height=5,units='in')
+par(bg='gray20',mar=c(5,5,4,1))
 b <- boxplot(gag$Estimated.Value~gag$Year,
              at=2014:2020,
              col='gray20',variwidth=T,border='white',
-             xlab='Year',ylab='Estimated Value (USD)',
-             staplewex=0,lty=1,lwd=2,axes=F)
+             xlab='Year',ylab='Estimated Value (millions USD)',
+             staplewex=0,lty=1,lwd=2,axes=F,col.lab='white',cex.lab=2)
 axis(1, col="white", col.ticks="white", col.axis="white", cex.axis=2)
-axis(2, col="white", col.ticks="white", col.axis="white", cex.axis=2)
+axis(2, seq(5e5,25e5,5e5), seq(.5,2.5,.5), col="white", col.ticks="white", col.axis="white", cex.axis=2,las=1)
+title('Red grouper landings value Jan-Jul',cex.main=3,col.main='white')
 box(col='white')
 for(i in 1:7){
   temp <- gag[gag$Month==mths[i],]
@@ -64,6 +67,7 @@ for(i in 1:7){
 legend('topright',
        c('Jan','Feb','Mar','Apr','May','Jun','Jul'),
        pch=1:7,col=1:7,lty=1:7,bty='n',cex=2,lwd=2)
+dev.off()
 # median_agg <- aggregate(gag$Estimated.Value,by=list(gag$Year),median,na.rm=T)
 # points(median_agg$Group.1,median_agg$x,pch='-',cex=2,lwd=3)
 
