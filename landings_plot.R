@@ -43,10 +43,12 @@ boxplot(gag$Estimated.Value~gag$Year)
 
 mths <- unique(gag$Month)
 # plot(0,0,xlim=c(2013,2021),ylim=c(1e5,25e5))
+par(bg='gray20')
 b <- boxplot(gag$Estimated.Value~gag$Year,
              at=2014:2020,
              col='white',variwidth=T,border='gray50',
-             xlab='Year',ylab='Estimated Value (USD)')
+             xlab='Year',ylab='Estimated Value (USD)',
+             staplewex=0,lty=1,lwd=2)
 for(i in 1:7){
   temp <- gag[gag$Month==mths[i],]
   points(temp$Year,temp$Estimated.Value,col=i,pch=i,lty=i,typ='b',lwd=2)
