@@ -43,11 +43,17 @@ boxplot(gag$Estimated.Value~gag$Year)
 
 mths <- unique(gag$Month)
 # plot(0,0,xlim=c(2013,2021),ylim=c(1e5,25e5))
-b <- boxplot(gag$Estimated.Value~gag$Year,at=2014:2020,col='white',variwidth=T,border='gray50')
+b <- boxplot(gag$Estimated.Value~gag$Year,
+             at=2014:2020,
+             col='white',variwidth=T,border='gray50',
+             xlab='Year',ylab='Estimated Value (USD)')
 for(i in 1:7){
   temp <- gag[gag$Month==mths[i],]
   points(temp$Year,temp$Estimated.Value,col=i,pch=i,lty=i,typ='b',lwd=2)
 }
+legend('topright',
+       c('Jan','Feb','Mar','Apr','May','Jun','Jul'),
+       pch=1:7,col=1:7,bty='n')
 # median_agg <- aggregate(gag$Estimated.Value,by=list(gag$Year),median,na.rm=T)
 # points(median_agg$Group.1,median_agg$x,pch='-',cex=2,lwd=3)
 
