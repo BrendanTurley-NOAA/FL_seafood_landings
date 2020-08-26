@@ -48,25 +48,27 @@ boxplot(gag$Estimated.Value~gag$Year)
 mths <- unique(gag$Month)
 # plot(0,0,xlim=c(2013,2021),ylim=c(1e5,25e5))
 setwd('~/Documents/R/Github/FL_seafood_landings/figures')
-png('gouper_landings.png',width=5,height=5,units='in')
+png('gouper_landings.png',width=12,height=10,units='in',res=300)
 par(bg='gray20',mar=c(5,5,4,1))
 b <- boxplot(gag$Estimated.Value~gag$Year,
              at=2014:2020,
              col='gray20',variwidth=T,border='white',
              xlab='Year',ylab='Estimated Value (millions USD)',
              staplewex=0,lty=1,lwd=2,axes=F,col.lab='white',cex.lab=2)
-axis(1, col="white", col.ticks="white", col.axis="white", cex.axis=2)
-axis(2, seq(5e5,25e5,5e5), seq(.5,2.5,.5), col="white", col.ticks="white", col.axis="white", cex.axis=2,las=1)
-title('Red grouper landings value Jan-Jul',cex.main=3,col.main='white')
+axis(1, col="white", col.ticks="white", col.axis="white", cex.axis=1.5)
+axis(2, seq(5e5,25e5,5e5), seq(.5,2.5,.5), col="white", col.ticks="white", col.axis="white", cex.axis=1.5,las=1)
+title('Florida Red grouper landings value',cex.main=3,col.main='white')
+mtext('Source: Florida Fish and Wildlife Commission',
+      line=4,side=1,adj=1,cex=1,col='white')
 box(col='white')
-for(i in 1:7){
+for(i in 1:6){
   temp <- gag[gag$Month==mths[i],]
   points(temp$Year,temp$Estimated.Value,
-         col=i,pch=i,lty=i,typ='b',lwd=2,cex=2)
+         col=(i+1),pch=i,lty=1,typ='b',lwd=3,cex=3)
 }
 legend('topright',
-       c('Jan','Feb','Mar','Apr','May','Jun','Jul'),
-       pch=1:7,col=1:7,lty=1:7,bty='n',cex=2,lwd=2)
+       c('Jan','Feb','Mar','Apr','May','Jun'),
+       pch=1:6,col=2:7,bty='n',cex=2,lwd=3,text.col='white',pt.cex=3)
 dev.off()
 # median_agg <- aggregate(gag$Estimated.Value,by=list(gag$Year),median,na.rm=T)
 # points(median_agg$Group.1,median_agg$x,pch='-',cex=2,lwd=3)
