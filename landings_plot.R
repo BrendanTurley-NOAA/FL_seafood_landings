@@ -16,8 +16,8 @@ ind_FM_gag <- base::intersect(ind_gag,ind_FM)
 
 gag <- data[ind_FM_gag,]
 
-plot(gag$Year,gag$Pounds)
-plot(gag$Year,gag$Estimated.Value)
+barplot(gag$Pounds,names.arg = gag$Year)
+barplot(gag$Estimated.Value,names.arg = gag$Year)
 
 
 ### data by month
@@ -33,10 +33,10 @@ ind_ytd <- which(data$Month=='January' |
 ### pull out Gag landed in year to date
 ind_gag_ytd <- base::intersect(ind_gag,ind_ytd)
 gag <- data[ind_gag,]
-# gag <- data[ind_gag_ytd,]
+gag <- data[ind_gag_ytd,]
 # gag <- data
-sum_agg <- aggregate(gag$Estimated.Value,by=list(gag$Year,gag$Month),sum,na.rm=T)
-
+sum_agg <- aggregate(gag$Estimated.Value,by=list(gag$Year),sum,na.rm=T)
+plot(sum_agg$Group.1,sum_agg$x)
 
 plot(gag$Year,gag$Pounds)
 plot(gag$Year,gag$Estimated.Value)
@@ -47,7 +47,7 @@ boxplot(gag$Estimated.Value~gag$Year)
 mths <- unique(gag$Month)
 # plot(0,0,xlim=c(2013,2021),ylim=c(1e5,25e5))
 setwd('~/Documents/R/Github/FL_seafood_landings/figures')
-png('gouper_landings.png',width=12,height=10,units='in',res=300)
+png('grouper_landings.png',width=12,height=10,units='in',res=300)
 par(bg='gray20',mar=c(5,5,4,1))
 b <- boxplot(gag$Estimated.Value~gag$Year,
              at=2014:2020,
