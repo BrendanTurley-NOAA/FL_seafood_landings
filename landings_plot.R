@@ -59,7 +59,7 @@ axis(2, seq(5e5,25e5,5e5), seq(.5,2.5,.5), col="white", col.ticks="white", col.a
 title('Florida red grouper landings ',cex.main=3,col.main='white')
 mtext('Source: Florida Fish and Wildlife Commission',
       line=3,side=1,adj=1,cex=1,col='white')
-mtext('Gaphic by: Brendan Turley @crabtails',
+mtext('Graphic by: Brendan Turley @crabtails',
       line=4,side=1,adj=1,cex=1,col='white')
 box(col='white')
 for(i in 1:6){
