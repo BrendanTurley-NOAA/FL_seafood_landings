@@ -29,8 +29,7 @@ ind_ytd <- which(data$Month=='January' |
                       data$Month=='March' |
                       data$Month=='April' |
                       data$Month=='May' |
-                      data$Month=='June' |
-                      data$Month=='July')
+                      data$Month=='June')
 ### pull out Gag landed in year to date
 ind_gag_ytd <- base::intersect(ind_gag,ind_ytd)
 gag <- data[ind_gag,]
@@ -57,18 +56,20 @@ b <- boxplot(gag$Estimated.Value~gag$Year,
              staplewex=0,lty=1,lwd=2,axes=F,col.lab='white',cex.lab=2)
 axis(1, col="white", col.ticks="white", col.axis="white", cex.axis=1.5)
 axis(2, seq(5e5,25e5,5e5), seq(.5,2.5,.5), col="white", col.ticks="white", col.axis="white", cex.axis=1.5,las=1)
-title('Florida Red grouper landings value',cex.main=3,col.main='white')
+title('Florida red grouper landings ',cex.main=3,col.main='white')
 mtext('Source: Florida Fish and Wildlife Commission',
+      line=3,side=1,adj=1,cex=1,col='white')
+mtext('Gaphic by: Brendan Turley @crabtails',
       line=4,side=1,adj=1,cex=1,col='white')
 box(col='white')
 for(i in 1:6){
   temp <- gag[gag$Month==mths[i],]
   points(temp$Year,temp$Estimated.Value,
-         col=(i+1),pch=i,lty=1,typ='b',lwd=3,cex=3)
+         col=(i+1),pch=i,lty=i,typ='b',lwd=4,cex=4)
 }
 legend('topright',
        c('Jan','Feb','Mar','Apr','May','Jun'),
-       pch=1:6,col=2:7,bty='n',cex=2,lwd=3,text.col='white',pt.cex=3)
+       pch=1:6,col=2:7,bty='n',cex=2,lwd=3,text.col='white',pt.cex=3,lty=1:6)
 dev.off()
 # median_agg <- aggregate(gag$Estimated.Value,by=list(gag$Year),median,na.rm=T)
 # points(median_agg$Group.1,median_agg$x,pch='-',cex=2,lwd=3)
